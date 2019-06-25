@@ -1,0 +1,59 @@
+﻿@model ViewModels.RemoveElemByNameViewModel
+
+@{
+    ViewBag.Title = "Eliminar elemento del inventario";
+}
+<div class="row">
+    @using (Html.BeginForm("GetElemToRemove", "Inventario", FormMethod.Get, new { id = "form-select" }))
+    {
+        <div class="input-field col s12 m6">
+            @Html.DropDownListFor(model => model.Nombre, Model.SelectListItems, "", new { onchange = "verElemento()" })
+            <label>Seleccionar elemento del inventario</label>
+        </div>
+
+    }
+</div>
+@if (Model.Nombre != null)
+{
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title text-bold">@Model.Nombre</span>
+                    <p>@Model.Tipo</p>
+                    <p>@Model.FechaCaducidad.ToShortDateString()
+                        @if (Model.FechaCaducidad.Date <= DateTime.Today.Date)
+                        {
+                            <span class="new badge red " data-badge-caption="CADUCADO"></span>
+                        }
+                        else
+                        {
+                            <span class="new badge green " data-badge-caption="OK"></span>
+                        }
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a href="@Url.Action("RemoveElem", "Inventario", new { nombre=Model.Nombre})" class="btn waves-effect waves-light goal-background-color">
+                        Sacar Elemento <i class="material-icons" style="vertical-align:middle">send</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.fixed-action-btn').floatingActionButton();
+            $('select').formSelect();
+            $('.sidenav').sidenav();
+            document.getElementById("nav-del").classList.add("active");
+        });
+
+        function verElemento() {
+            $('#form-select').submit();
+        }
+    </script>
+}

@@ -1,0 +1,102 @@
+﻿@model ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Gestión de Inventarios";
+}
+
+
+<div class="row">
+    <div class="col s12">
+        <h3>Inventario</h3>
+        <hr />
+        @if (Model.Inventario.Count == 0)
+        {
+            <h4 class="red-text center">Inventario vacío</h4>
+        }
+        else
+        {
+            <table class="striped highlight centered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Fecha de caducidad</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i = 0;}
+                    @foreach (var elem in Model.Inventario)
+                    {
+                        <tr>
+                            @{i++;}
+                            <td class="text-bold"><span class="new badge black white-text text-bold" data-badge-caption="@i"></span></td>
+                            <td class="text-bold">@elem.Value.Nombre</td>
+                            <td>@elem.Value.Tipo</td>
+                            <td>@elem.Value.FechaCaducidad.ToShortDateString()</td>
+                            @if (elem.Value.FechaCaducidad.Date <= DateTime.Today.Date)
+                            {
+                                <td><span class="new badge red" data-badge-caption="CADUCADO"></span></td>
+                            }
+                            else
+                            {
+                                <td><span class="new badge green" data-badge-caption="OK"></span></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    @if (Model.UltimoElementoEliminado.Eliminado)
+    {
+
+        Model.UltimoElementoEliminado.Eliminado = false;
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Notificación de elemento eliminado</h4>
+                <p>Se ha sacado el elemento <span class="text-bold">@Model.UltimoElementoEliminado.NombreElemento</span> del inventario.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-goal btn-flat">Aceptar</a>
+            </div>
+        </div>
+
+    }
+</div>
+
+@section scripts
+{
+
+
+    @foreach (var elem in Model.Inventario)
+    {
+        if (elem.Value.FechaCaducidad.Date <= DateTime.Today.Date)
+        {
+            <script>
+                $('.pushpin-demo-nav').each(function () {
+                    var $this = $(this);
+                    var $target = $('#' + $(this).attr('data-target'));
+                    $this.pushpin({
+                        top: $target.offset().top,
+                        bottom: $target.offset().top + $target.outerHeight() - $this.height()
+                    });
+                });
+            </script>
+        }
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.modal').modal('open');
+            $('.pushpin').pushpin();
+            $('.sidenav').sidenav();
+            document.getElementById("nav-list").classList.add("active");
+        });
+
+    </script>
+}

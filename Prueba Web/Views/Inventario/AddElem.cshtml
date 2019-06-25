@@ -1,0 +1,50 @@
+﻿@model ViewModels.AddElemViewModel
+
+@{
+    ViewBag.Title = "Añadir elemento al inventario";
+}
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    @Html.EditorFor(model => model.Nombre, new { type = "text", @class = "validate" })
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "red-text" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    @Html.EditorFor(model => model.Tipo, new { type = "text", @class = "validate" })
+                    @Html.LabelFor(model => model.Tipo)
+                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "red-text" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input type="text" class="datepicker" name="FechaCaducidad">
+                    @Html.LabelFor(model => model.FechaCaducidad)
+                    @Html.ValidationMessageFor(model => model.FechaCaducidad, "", new { @class = "red-text" })
+                </div>
+            </div>
+            <button type="submit" name="action" class="btn waves-effect waves-light goal-background-color">
+                Añadir Elemento <i class="material-icons" style="vertical-align:middle">send</i>
+            </button>
+        }
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        $('.fixed-action-btn').floatingActionButton();
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy"
+        });
+        $('.sidenav').sidenav();
+        document.getElementById("nav-add").classList.add("active");
+    });
+</script>
+    }

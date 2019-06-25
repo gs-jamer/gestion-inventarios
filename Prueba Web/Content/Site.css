@@ -1,0 +1,147 @@
+﻿html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height:100%;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.goal-background-color {
+    background-color: rgba(92, 120, 143, 1);
+}
+
+.goal-header-icon{
+    vertical-align: text-bottom;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #5c788f;
+    -webkit-box-shadow: 0 1px 0 0 #5c788f;
+    box-shadow: 0 1px 0 0 #5c788f;
+}
+
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=url]:not(.browser-default):focus:not([readonly]) + label,
+input[type=time]:not(.browser-default):focus:not([readonly]) + label,
+input[type=date]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
+input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+input[type=search]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: rgb(92, 120, 143);
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover {
+    background-color: rgb(75, 99, 118);
+}
+
+.badge-remove{
+    float:left !important;
+    margin-left:0 !important;
+    margin-top: 2px !important;
+}
+
+.text-bold{
+    font-weight:bold !important;
+}
+
+.datepicker-date-display {
+    background-color: rgb(92, 120, 143);
+}
+
+.datepicker-day-button:focus {
+    background-color: rgba(92, 120, 143, 0.25);
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+    color: rgb(92, 120, 143);
+}
+
+.datepicker-table td.is-today {
+    color: rgb(92, 120, 143);
+}
+
+.datepicker-table td.is-selected {
+    background-color: rgb(92, 120, 143);
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: rgb(92, 120, 143);
+}
+
+.waves-effect.waves-goal .waves-ripple {
+    background-color: rgba(92, 120, 143, 0.7);
+}
+
+
+.sidenav li > a {
+    height: auto;
+    line-height: 30px;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.sidenav li > .sidenav-header {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-bottom: solid 1px #000;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+
+.no-margin{
+    margin: 0 0 0 0 !important;
+}
