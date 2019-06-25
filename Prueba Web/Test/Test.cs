@@ -13,20 +13,30 @@ namespace Controllers
     [TestClass]
     public class Test
     {
+        private InventarioController _controller;
+        private InventarioController TestController
+        {
+            get
+            {
+                if(_controller == null)
+                {
+                    _controller = new InventarioController();
+                }
+                return _controller;
+            }
+        }
 
-        [TestMethod]
         public void PtoEntrada()
         {
-            var controller = new InventarioController();
-            var result = controller.Index() as ViewResult;
-
-            Assert.AreEqual("Index", result.ViewName);
+            InsertarElemento();
+            InsertarElementoCaducado();
+            BorrarElemento();
+            BorrarElementoCaducado();
         }
 
         [TestMethod]
         public void InsertarElemento()
         {
-            var controller = new InventarioController();
             string nombre = "Elemento Inventario 1";
             string tipo = "Tipo Correcto";
             DateTime fecha = DateTime.Today;
@@ -36,16 +46,16 @@ namespace Controllers
                 Tipo = tipo,
                 FechaCaducidad = fecha
             };
-            var result = (RedirectToRouteResult) controller.AddElem(model);
+            var result = (RedirectToRouteResult)TestController.AddElem(model);
 
             Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.IsTrue(Inventario.DicInventario.ContainsKey(nombre));
             Assert.AreEqual(new InventarioElem(nombre, fecha, tipo), Inventario.DicInventario[nombre]);
         }
 
         [TestMethod]
         public void InsertarElementoCaducado()
         {
-            var controller = new InventarioController();
             string nombre = "Elemento Inventario 2 Caducado";
             string tipo = "Tipo Caducado";
             DateTime fecha = DateTime.Today.AddMonths(-1);
@@ -55,32 +65,32 @@ namespace Controllers
                 Tipo = tipo,
                 FechaCaducidad = fecha
             };
-            var result = (RedirectToRouteResult)controller.AddElem(model);
+            var result = (RedirectToRouteResult)TestController.AddElem(model);
 
             Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.IsTrue(Inventario.DicInventario.ContainsKey(nombre));
+            Assert.AreEqual(new InventarioElem(nombre, fecha, tipo), Inventario.DicInventario[nombre]);
         }
 
         [TestMethod]
         public void BorrarElemento()
         {
-            var controller = new InventarioController();
-            string nombre = "Elemento Inventario 2 Caducado";
-            var result = (RedirectToRouteResult)controller.RemoveElem(nombre);
+            string nombre = "Elemento Inventario 1";
+            var result = (RedirectToRouteResult)TestController.RemoveElem(nombre);
 
             Assert.AreEqual("Index", result.RouteValues["action"]);
-            Assert.AreEqual(false, Inventario.DicInventario.ContainsKey(nombre));
+            Assert.IsFalse(Inventario.DicInventario.ContainsKey(nombre));
         }
 
         [TestMethod]
         public void BorrarElementoCaducado()
         {
+            string nombre = "Elemento Inventario 2 Caducado";
+            var result = (RedirectToRouteResult)TestController.RemoveElem(nombre);
 
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+            Assert.IsFalse(Inventario.DicInventario.ContainsKey(nombre));
         }
-
-        [TestMethod]
-        public void ListarElementos()
-        {
-
-        }
+        
     }
 }
