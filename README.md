@@ -93,3 +93,8 @@ No tiene nada del otro mundo, cuando se saca un elemento del inventario, la acci
 6.4.4. Notificar cuando un elemento caduca
 ------------------------------------------------------------------------------
 Para las notificaciones, he implementado un Sidebar (aunque en la vida real no se use para hacer este tipo de cosas) con un listado de los elementos que han caducado. Por tanto, el usuario tiene siempre visible el botón de notificaciones en la barra de navegación y ver si tras insertar, borrar o simplemente entrar a ver el índice, existen elementos caducados o no.
+
+
+6.5. Versión móvil
+------------------------------------------------------------------------------
+Gracias a las teconologías responsive de la librería CSS de Materialize, el proyecto también es visible como aplicación móvil.
